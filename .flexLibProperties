@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="com.hendrix.processManager.core.types.BaseProcess"/>
+    <classEntry path="com.hendrix.processManager.core.interfaces.IProcess"/>
+    <classEntry path="com.hendrix.processManager.core.interfaces.IDisposable"/>
+    <classEntry path="com.hendrix.processManager.core.types.ProcessManagerStatus"/>
+    <classEntry path="com.hendrix.processManager.core.types.ProcessManagerError"/>
+    <classEntry path="com.hendrix.processManager.core.interfaces.IId"/>
+    <classEntry path="com.hendrix.processManager.core.types.SimpleProcess"/>
+    <classEntry path="com.hendrix.processManager.core.interfaces.IProcessable"/>
+    <classEntry path="com.hendrix.processManager.core.interfaces.IPriority"/>
+    <classEntry path="com.hendrix.processManager.core.interfaces.IProcessManager"/>
+    <classEntry path="com.hendrix.processManager.ProcessManager"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
