@@ -24,7 +24,9 @@ package com.hendrix.processManager
     
     private var _storeFinishedProcesses:Boolean                 = true;
     private var _numProcessesAtOnce:    Number                  = Number.POSITIVE_INFINITY;
-    private var _status:                ProcessManagerStatus  = null;
+    private var _status:                ProcessManagerStatus    = null;
+    
+    private var _hasStarted:            Boolean                 = false;
     
     /**
      * <p>implements a process manager thru a common <code>IProcessManager</code> interface</p>
@@ -57,6 +59,16 @@ package com.hendrix.processManager
       
       _status                 = new ProcessManagerStatus();
       _status.status          = ProcessManagerStatus.STATUS_READY;
+    }
+    
+    /**
+     * indicates that the worker manager has started. i.e that <code>this.start()</code> method was invoked.
+     *  
+     * @return <code>(true/false)</code> 
+     * 
+     */
+    public function get hasStarted():Boolean {
+      return _hasStarted;
     }
     
     /**
@@ -109,10 +121,12 @@ package com.hendrix.processManager
      */
     public function start():void
     {
+      _hasStarted         = true;
+
       if(isRunning()) {
         trace("ProcessManager.start():: is already working: WORKING or IDLE");
         return;
-      }
+      }            
       
       _status.status      = ProcessManagerStatus.STATUS_IDLE;
       
@@ -269,7 +283,7 @@ package com.hendrix.processManager
     public function notifyProgress(prcs: IProcess):void
     {
       if(onProgress is Function)
-        onProgress(prcs.id);      
+        onProgress(_storeFinishedProcesses ? prcs.id : prcs);      
     }
     
     /**
@@ -318,15 +332,17 @@ package com.hendrix.processManager
       if(isRunning() == false)
         return;
       
-      // check completion
-      if(_processesQueue.queueSize==0 && _runningProcesses.count==0) {
-        _status.status = ProcessManagerStatus.STATUS_IDLE
-        notifyComplete();
-        return;
-      }
-      
       notifyProgress($element);   
       
+      // check completion
+      if(_processesQueue.queueSize==0 && _runningProcesses.count==0) {
+        _status.status = ProcessManagerStatus.STATUS_IDLE;
+        
+        notifyComplete();
+        
+        return;
+      }
+            
       runNextProcess();
     }
     

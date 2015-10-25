@@ -49,6 +49,10 @@ package com.hendrix.processManager.core.types
     public function get dataAux():                Object  { return _dataAux;    }
     public function set dataAux(value:Object):    void    { _dataAux = value;   }
     
+    public function toString():String {
+      return msgError + "::" + codeError + "::" + dataAux;
+    }
+    
   }
   
 }

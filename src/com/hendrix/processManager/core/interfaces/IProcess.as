@@ -6,5 +6,7 @@ package com.hendrix.processManager.core.interfaces
    */
   public interface IProcess extends IId, IPriority, IProcessable, IDisposable
   {
+    function toString():String;
   }
+  
 }

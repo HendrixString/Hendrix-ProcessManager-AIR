@@ -20,12 +20,14 @@ package com.hendrix.processManager.core.types
      * a base process that implements <code>IProcess</code>, helpful to make implementation of
      * an <code>IProcess</code> easy. programmer can implement <code>IProcess</code> directly without
      * this class
+     * 
      * @see com.mreshet.mrProcessManager.core.interfaces.IProcess
+     * 
      * @author Tomer Shalev
      */
     public function BaseProcess($id:String = null, $priorityKey:Object = 10)
-    {
-      _id = $id;
+    {      
+      _id = $id ? $id : new Date().getTime().toString();
       
       _priorityKey = $priorityKey;
     }
@@ -103,5 +105,11 @@ package com.hendrix.processManager.core.types
     {
       _priorityKey = value;
     }
+    
+    public function toString():String
+    {      
+      return "(worker info, id=" + _id + ")";
+    }
+    
   }
 }
